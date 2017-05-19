@@ -103,7 +103,7 @@
     "resources": [
         {
             "type": "Microsoft.Insights/autoscalesettings",
-            "name": "autoscale",
+            "name": "[variables('autoscaleName')]",
             "apiVersion": "2014-04-01",
             "location": "West Europe",
             "tags": {},
