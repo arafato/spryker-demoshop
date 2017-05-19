@@ -20,20 +20,6 @@
                 "description": "admin password of postgresql db"
             }
         },
-        "clusterName": {
-            "type": "string",
-            "defaultValue": "es-azure",
-            "metadata": {
-                "description": "The name of the cluster."
-            }
-        },
-        "vmssName": {
-            "type": "string",
-            "metadata": {
-                "description": "String used as a base for naming resources. Must be 3-61 characters in length and globally unique across Azure. A hash is prepended to this string for some resources, and resource-specific information is appended."
-            },
-            "maxLength": 61
-        },
         "instanceCount": {
             "type": "int",
             "metadata": {
@@ -84,7 +70,7 @@
         "storageAccountType": "Premium_LRS",
         "addressPrefix": "10.0.0.0/16",
         "subnetPrefix": "10.0.0.0/24",
-        "namingInfix": "[toLower(parameters('vmssName'))]",
+        "namingInfix": "[concat(variables('nameprefix'), 'vmss')]",
         "domainNameLabel": "[variables('namingInfix')]",
         "virtualNetworkName": "[concat(variables('namingInfix'), '-vnet')]",
         "publicIpAddressName": "[concat(variables('namingInfix'), '-pip')]",
@@ -110,6 +96,7 @@
             "sku": "16.04-LTS",
             "version": "latest"
         },
+        "clusterName": "es-azure",
         "elasticSetupScriptUrl": "[concat(parameters('_artifactsLocation'), '/elasticsearch-vmss/install-elasticsearch.sh', parameters('_artifactsLocationSasToken'))]",
         "diskSetupScriptUrl": "[concat(parameters('_artifactsLocation'), '/shared_scripts/ubuntu/vm-disk-utils-0.1.sh', parameters('_artifactsLocationSasToken'))]"
     },
@@ -583,7 +570,7 @@
                                 "[variables('elasticSetupScriptUrl')]",
                                 "[variables('diskSetupScriptUrl')]"
                             ],
-                            "commandToExecute": "[concat('bash install-elasticsearch.sh -m -n ', parameters('clusterName'))]"
+                            "commandToExecute": "[concat('bash install-elasticsearch.sh -m -n ', variables('clusterName'))]"
                         }
                     }
                 }
@@ -665,7 +652,7 @@
                                         "fileUris": [
                                             "[variables('elasticSetupScriptUrl')]"
                                         ],
-                                        "commandToExecute": "[concat('bash install-elasticsearch.sh -n ', parameters('clusterName'))]"
+                                        "commandToExecute": "[concat('bash install-elasticsearch.sh -n ', variables('clusterName'))]"
                                     }
                                 }
                             }

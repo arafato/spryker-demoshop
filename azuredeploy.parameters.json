@@ -4,6 +4,21 @@
     "parameters": {
         "containerTag": {
             "value": "61"
+        },
+        "postgresqllogin": {
+            "value": "postgres"
+        },
+        "postgresqlpwd": {
+            "value": "Spryker2017"
+        },
+        "instanceCount": {
+            "value": "5"
+        },
+        "adminUsername": {
+            "value": "esadmin"
+        },
+        "adminPassword": {
+            "value": "Spryker2017"
         }
     }
 }
