@@ -56,7 +56,7 @@
         }
     },
     "variables": {
-        "nameprefix": "[uniquestring(concat(resourceGroup().id, subscription().id))]",
+        "nameprefix": "[uniquestring(concat('a', resourceGroup().id, subscription().id))]",
         "siteNameZed": "[concat(variables('nameprefix'), 'zed')]",
         "siteNameYves": "[concat(variables('nameprefix'), 'yves')]",
         "servicePlanName": "[concat(variables('nameprefix'), 'asp')]",
@@ -175,12 +175,7 @@
                 "name": "S1",
                 "capacity": 1
             },
-            "kind": "linux",
-            "properties": {
-                "workerSizeId": 0,
-                "reserved": true,
-                "hostingEnvironment": ""
-            }
+            "kind": "linux"
         },
         {
             "type": "Microsoft.Web/sites",
@@ -192,7 +187,8 @@
                 "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('servicePlanName'))]"
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Web/serverfarms', variables('servicePlanName'))]"
+                "[resourceId('Microsoft.Web/serverfarms', variables('servicePlanName'))]",
+                "[resourceId('Microsoft.Cache/Redis', variables('redisName'))]"
             ],
             "resources": [
                 {
@@ -235,7 +231,8 @@
                 "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('servicePlanName'))]"
             },
             "dependsOn": [
-                "[resourceId('Microsoft.Web/serverfarms', variables('servicePlanName'))]"
+                "[resourceId('Microsoft.Web/serverfarms', variables('servicePlanName'))]",
+                "[resourceId('Microsoft.Cache/Redis', variables('redisName'))]"
             ],
             "resources": [
                 {
