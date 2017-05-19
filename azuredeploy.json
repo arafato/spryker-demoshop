@@ -196,7 +196,11 @@
                     "type": "config",
                     "apiVersion": "2016-03-01",
                     "dependsOn": [
-                        "[resourceId('Microsoft.Web/sites', variables('siteNameYves'))]"
+                        "[resourceId('Microsoft.Web/sites', variables('siteNameYves'))]",
+                        "[resourceId('Microsoft.Web/serverfarms', variables('servicePlanName'))]",
+                        "[resourceId('Microsoft.Cache/Redis', variables('redisName'))]",
+                        "[resourceId('Microsoft.DBforPostgreSQL/servers', variables('postgresqlName'))]",
+                        "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpAddressName'))]"
                     ],
                     "tags": {
                         "displayName": "appSettings"
@@ -211,10 +215,10 @@
                         "POSTGRES_USER": "[variables('postgresqlLogin')]",
                         "POSTGRES_PASSWORD": "[variables('postgresqlPwd')]",
                         "POSTGRES_DATABASE": "DE_dockertest_zed",
-                        "ELASTICSEARCH_HOST": "[reference(variables('publicIpAddressName')).ipAddress]",
+                        "ELASTICSEARCH_HOST": "[reference(variables('publicIpAddressName')).dnsSettings.fqdn]",
                         "ELASTICSEARCH_PORT": "9200",
                         "REDIS_HOST": "[reference(variables('redisName')).hostName]",
-                        "REDIS_PASSWORD": "[listKeys(variables('redisName'), '2016-04-01').keys[0].value]",
+                        "REDIS_PASSWORD": "[listKeys(variables('redisName'), '2016-04-01').primaryKey]",
                         "ZED_HOST": "[concat(variables('siteNameZed'), '.azurewebsites.net')]",
                         "ZED_PROTOCOL": "http"
                     }
@@ -232,7 +236,9 @@
             },
             "dependsOn": [
                 "[resourceId('Microsoft.Web/serverfarms', variables('servicePlanName'))]",
-                "[resourceId('Microsoft.Cache/Redis', variables('redisName'))]"
+                "[resourceId('Microsoft.Cache/Redis', variables('redisName'))]",
+                "[resourceId('Microsoft.DBforPostgreSQL/servers', variables('postgresqlName'))]",
+                "[resourceId('Microsoft.Network/publicIPAddresses', variables('publicIpAddressName'))]"
             ],
             "resources": [
                 {
@@ -272,7 +278,6 @@
             "location": "[resourceGroup().location]",
             "tags": {},
             "properties": {
-                "redisVersion": "3.2.7",
                 "sku": {
                     "name": "Standard",
                     "family": "C",
