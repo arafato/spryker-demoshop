@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "containerTag": {
-            "type": "int",
+            "type": "string",
             "metadata": {
                 "description": "Tag of Spryker Demoshop Image"
             }
