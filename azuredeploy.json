@@ -261,7 +261,7 @@
                         "POSTGRES_USER": "[variables('postgresqlLogin')]",
                         "POSTGRES_PASSWORD": "[variables('postgresqlPwd')]",
                         "POSTGRES_DATABASE": "DE_dockertest_zed",
-                        "ELASTICSEARCH_HOST": "[reference(variables('publicIpAddressName')).ipAddress]",
+                        "ELASTICSEARCH_HOST": "[reference(variables('publicIpAddressName')).dnsSettings.fqdn]",
                         "ELASTICSEARCH_PORT": "9200",
                         "REDIS_HOST": "[reference(variables('redisName')).hostName]",
                         "REDIS_PASSWORD": "[listKeys(variables('redisName'), '2016-04-01').primaryKey]",
