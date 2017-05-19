@@ -1,5 +1,5 @@
 # Spryker Demoshop on Azure
-ARM Template to deploy the Spryker demo shop on Azure using managed services. This includes App Service on Linux, Azure Redis Cache, Azure Postgresql, and an Elastic Search Cluster.
+ARM Template to deploy the Spryker demo shop on Azure using managed services (except ElastiSearch). This includes App Service on Linux, Azure Redis Cache, Azure Postgresql, and an Elastic Search Cluster.
 
 The Demoshop is based on the Spryker Commerce Framework http://spryker.com/
 
