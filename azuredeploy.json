@@ -264,7 +264,7 @@
                         "ELASTICSEARCH_HOST": "[reference(variables('publicIpAddressName')).ipAddress]",
                         "ELASTICSEARCH_PORT": "9200",
                         "REDIS_HOST": "[reference(variables('redisName')).hostName]",
-                        "REDIS_PASSWORD": "[listKeys(variables('redisName'), '2016-04-01').keys[0].value]",
+                        "REDIS_PASSWORD": "[listKeys(variables('redisName'), '2016-04-01').primaryKey]",
                         "YVES_HOST": "[concat(variables('siteNameYves'), '.azurewebsites.net')]",
                         "YVES_PROTOCOL": "http"
                     }
